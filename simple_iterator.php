@@ -1,11 +1,26 @@
 <?php
 
+/**
+ * Class SimpleIterator
+ *
+ * Simple Db iterator.
+ *
+ */
 class SimpleIterator implements Iterator
 {
+    /**
+     * @var PDO
+     */
     private $pdo;
 
+    /**
+     * @var int
+     */
     private $possision = 0;
 
+    /**
+     * @var int
+     */
     private $limit = 2;
 
     public function __construct()
@@ -87,10 +102,12 @@ class SimpleIterator implements Iterator
 
 $simpleIterator = new SimpleIterator();
 
-//foreach ($simpleIterator as $key => $val) {
-//    var_dump($val);
-//    print PHP_EOL;
-//}
+foreach ($simpleIterator as $key => $val) {
+    var_dump($val);
+    print PHP_EOL;
+}
+
+/** optional implementation */
 
 $simpleIterator->rewind();
 
