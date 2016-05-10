@@ -16,7 +16,7 @@ class SimpleIterator implements Iterator
     /**
      * @var int
      */
-    private $possision = 0;
+    private $position = 0;
 
     /**
      * @var int
@@ -40,7 +40,7 @@ class SimpleIterator implements Iterator
      */
     public function current()
     {
-        return $this->getPosts($this->possision, $this->limit);
+        return $this->getPosts($this->position, $this->limit);
 
     }
 
@@ -52,7 +52,7 @@ class SimpleIterator implements Iterator
      */
     public function next()
     {
-        return $this->possision += $this->limit;
+        return $this->position += $this->limit;
     }
 
     /**
@@ -63,7 +63,7 @@ class SimpleIterator implements Iterator
      */
     public function key()
     {
-        return $this->possision;
+        return $this->position;
     }
 
     /**
@@ -75,7 +75,7 @@ class SimpleIterator implements Iterator
      */
     public function valid()
     {
-        $rows = $this->getPosts($this->possision, $this->limit);
+        $rows = $this->getPosts($this->position, $this->limit);
 
         return !empty($rows);
     }
@@ -88,12 +88,12 @@ class SimpleIterator implements Iterator
      */
     public function rewind()
     {
-        $this->possision = 0;
+        $this->position = 0;
     }
 
-    private function getPosts($possision, $limit)
+    private function getPosts($position, $limit)
     {
-        $sql = 'SELECT id, title, created_at FROM posts LIMIT ' . $possision . ', ' . $limit;
+        $sql = 'SELECT id, title, created_at FROM posts LIMIT ' . $position . ', ' . $limit;
 
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll();
